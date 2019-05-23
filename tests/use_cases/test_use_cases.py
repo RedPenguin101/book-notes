@@ -4,6 +4,7 @@ from unittest import mock
 
 from book.domain import book as b
 from book.use_cases import book_list_use_case as uc
+from book.requests import book_list_request_objects as req
 
 
 @pytest.fixture
@@ -29,6 +30,8 @@ def test_book_list_uc_executes_with_empty_request(books):
     mock_repo.list.return_value = books
 
     use_case = uc.BookListUseCase(mock_repo)
-    response = use_case.execute(None)
+
+    request = req.BookListRequest()
+    response = use_case.execute(request)
 
     assert response == books
