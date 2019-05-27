@@ -1,5 +1,6 @@
 from json import JSONEncoder
 
+
 class BookJsonEncoder(JSONEncoder):
     def default(self, o):
         try:

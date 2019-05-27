@@ -3,6 +3,7 @@ import pytest
 from book.repositories import memrepo
 from book.domain import book as b
 
+
 @pytest.fixture
 def book_dict():
     return [
@@ -27,6 +28,7 @@ def book_dict():
                 'author': 'Matthew Walker'
             }
     ]
+
 
 def test_repo_without_params(book_dict):
     repo = memrepo.MemRepo(book_dict)
