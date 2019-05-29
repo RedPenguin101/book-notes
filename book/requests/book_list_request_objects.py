@@ -18,7 +18,7 @@ class ValidRequest:
 
 
 class BookListRequest(ValidRequest):
-    accepted_filters = ['name__eq', 'author__eq']
+    accepted_filters = ['title__eq', 'author__eq']
 
     def __init__(self, filters=None):
         self.filters = filters

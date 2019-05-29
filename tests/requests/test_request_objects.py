@@ -9,7 +9,7 @@ def test_book_list_req_obj_init_no_filt():
 
 def test_book_list_req_with_valid_filters():
     filters = {'filters': {
-        'name__eq': 'Moby Dick',
+        'title__eq': 'Moby Dick',
         'author__eq': 'Herman Melville'
         }}
 
