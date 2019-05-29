@@ -12,11 +12,10 @@ class MemRepo:
         results = self.books.copy()
 
         if 'title__eq' in filters:
-            return 'fuck you'
             temp = []
 
             for book in results:
-                if filters['title__eq'] == book['title']:
+                if filters['title__eq'] == book.title:
                     temp.append(book)
 
             results = temp
@@ -25,7 +24,7 @@ class MemRepo:
             temp = []
 
             for book in results:
-                if filters['author__eq'] == book['author']:
+                if filters['author__eq'] == book.author:
                     temp.append(book)
             results = temp
 

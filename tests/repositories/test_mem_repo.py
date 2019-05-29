@@ -34,3 +34,13 @@ def test_repo_without_params(book_dict):
     repo = memrepo.MemRepo(book_dict)
     books = [b.Book.from_dict(i) for i in book_dict]
     assert repo.list() == books
+
+
+def test_repo_with_params(book_dict):
+    repo = memrepo.MemRepo(book_dict)
+
+    filters = {'title__eq': 'Moby Dick'}
+    results = repo.list(filters=filters)
+
+    assert results[0].code == '66ece076-2cdb-4a9c-ac45-a4c672953def'
+    assert len(results) == 1
