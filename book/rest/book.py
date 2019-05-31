@@ -46,8 +46,7 @@ def book():
     query_string = {'filters': {}}
 
     for arg, values in request.args.items():
-        if arg.startswith('filter_'):
-            query_string['filters'][arg.replace('filter_','')] = values
+        query_string['filters'][arg.replace('filter_','')] = values
 
     request_object = req.BookListRequest.from_dict(query_string)
 
