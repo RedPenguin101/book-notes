@@ -41,12 +41,13 @@ STATUS_CODES = {
         res.ResponseFailure.SYSTEM_ERROR: 500,
         }
 
+
 @blueprint.route('/books', methods=['GET'])
 def book():
     query_string = {'filters': {}}
 
     for arg, values in request.args.items():
-        query_string['filters'][arg.replace('filter_','')] = values
+        query_string['filters'][arg.replace('filter_', '')] = values
 
     request_object = req.BookListRequest.from_dict(query_string)
 
@@ -55,5 +56,5 @@ def book():
     response_object = use_case.execute(request_object)
 
     return Response(json.dumps(response_object.value, cls=ser.BookJsonEncoder),
-            mimetype='application/json',
-            status=STATUS_CODES[response_object.type])
+                    mimetype='application/json',
+                    status=STATUS_CODES[response_object.type])

@@ -31,19 +31,20 @@ book_list = [
 
 books = [Book.from_dict(book) for book in book_list]
 
+
 @mock.patch('book.use_cases.book_list_use_case.BookListUseCase')
 def test_get(mock_use_case, client):
     mock_use_case().execute.return_value = res.ResponseSuccess(books)
 
     http_response = client.get('/books')
 
-    assert json.loads(http_response.data.decode('UTF-8')) == [book_list]
+    assert json.loads(http_response.data.decode('UTF-8')) == book_list
 
     mock_use_case().execute.assert_called()
     args, kwargs = mock_use_case().execute.call_args
     assert args[0].filters == {}
 
-    assert http_response.status_bode == 200
+    assert http_response.status_code == 200
     assert http_response.mimetype == 'application/json'
 
 
@@ -53,12 +54,12 @@ def test_get_with_filters(mock_use_case, client):
 
     http_response = client.get('/books?filter_title__eq=Moby+Dick')
 
-    assert json.loads(http_response.data.decode('UTF-8')) == [book_list]
+    assert json.loads(http_response.data.decode('UTF-8')) == book_list
 
     mock_use_case().execute.assert_called()
     args, kwargs = mock_use_case().execute.call_args
 
-    assert args[0].filters == {'title__eq':'Moby Dick'}
+    assert args[0].filters == {'title__eq': 'Moby Dick'}
 
-    assert http_response.status_bode == 200
+    assert http_response.status_code == 200
     assert http_response.mimetype == 'application/json'
