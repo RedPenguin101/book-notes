@@ -20,3 +20,6 @@ class Book:
 
     def __eq__(self, other):
         return self.to_dict() == other.to_dict()
+
+    def increment_times_read(self):
+        self.times_read += 1

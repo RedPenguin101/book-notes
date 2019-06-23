@@ -13,7 +13,7 @@ def test_book_initialise():
     assert book.times_read == 1
 
 
-def test_book_init_from_dict():
+def test_book_init_from_dict_with_read():
     code = uuid.uuid4()
     book = b.Book.from_dict({
         'code': code,
@@ -40,3 +40,16 @@ def test_book_init_from_dict_with_no_read():
     assert book.title == 'Moby Dick'
     assert book.author == 'Herman Melville'
     assert book.times_read == 0
+
+
+def test_increment_of_times_read():
+    code = uuid.uuid4()
+    book = b.Book.from_dict({
+        'code': code,
+        'title': 'Moby Dick',
+        'author': 'Herman Melville',
+        })
+
+    assert book.times_read == 0
+    book.increment_times_read()
+    assert book.times_read == 1
